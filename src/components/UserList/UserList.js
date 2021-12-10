@@ -1,13 +1,20 @@
-import React, { useEffect, useState } from "react";
-import Text from "components/Text";
+import React, { useEffect, useState, useContext } from "react";
+import { FavoritesContext } from "Context/FavoritesContext";
+import { useFavorites } from "hooks/useFavorites";
+import User from "components/User"
 import Spinner from "components/Spinner";
 import CheckBox from "components/CheckBox";
-import IconButton from "@material-ui/core/IconButton";
-import FavoriteIcon from "@material-ui/icons/Favorite";
+import {COUNTRIES}  from "constant";
+
 import * as S from "./style";
 
 const UserList = ({ users, isLoading }) => {
+
   const [hoveredUserId, setHoveredUserId] = useState();
+  const [searchValue, setSearchValue] = useState([]);
+  const [favoriteUserId, setFavoriteUserId] = useState([]);
+  const {favorites, setFavorites} = useContext(FavoritesContext);
+  const { toggleFavorite, isFavorite } = useFavorites();
 
   const handleMouseEnter = (index) => {
     setHoveredUserId(index);
@@ -17,43 +24,66 @@ const UserList = ({ users, isLoading }) => {
     setHoveredUserId();
   };
 
+  // const toggleFavorite = (user)=>{
+  //   if(favoriteUserId.includes(user.login.uuid)){
+  //     setFavoriteUserId(favoriteUserId.filter(value=> value !== user.login.uuid))
+  //     setFavorites(favorites[user.login.uuid].filter(favorite=> favorite.login.uuid !== user.login.uuid))
+  //     return
+  //   }
+  //   setFavoriteUserId([...favoriteUserId, user.login.uuid]);
+  //   setFavorites({...favorites, user})
+  //   console.log(favorites);
+  // }
+
+  const onChange = (value)=>{
+    if(searchValue.includes(value)){
+      setSearchValue(searchValue.filter(val=> val !== value))
+      return
+    }
+    setSearchValue([...searchValue, value])
+  };
+
+  const applyUsers = ()=>{
+    let usersTmp = users;
+    searchValue.length && (usersTmp = users.filter(({nat}) => searchValue.includes(nat)))
+    
+    return usersTmp
+  };
+  
+
   return (
     <S.UserList>
       <S.Filters>
-        <CheckBox value="BR" label="Brazil" />
-        <CheckBox value="AU" label="Australia" />
-        <CheckBox value="CA" label="Canada" />
-        <CheckBox value="DE" label="Germany" />
+        {
+        COUNTRIES.map(({_id, _country})=>(
+          <CheckBox 
+          key={_id}
+          value={_id}
+          label={_country[0].toUpperCase() + _country.slice(1)}
+          onChange={()=> onChange(_id)}
+          
+          />
+        ))}
       </S.Filters>
       <S.List>
-        {users.map((user, index) => {
+        {console.log(users)}
+        {applyUsers()
+        .map((user, index) => {
           return (
-            <S.User
-              key={index}
-              onMouseEnter={() => handleMouseEnter(index)}
-              onMouseLeave={handleMouseLeave}
-            >
-              <S.UserPicture src={user?.picture.large} alt="" />
-              <S.UserInfo>
-                <Text size="22px" bold>
-                  {user?.name.title} {user?.name.first} {user?.name.last}
-                </Text>
-                <Text size="14px">{user?.email}</Text>
-                <Text size="14px">
-                  {user?.location.street.number} {user?.location.street.name}
-                </Text>
-                <Text size="14px">
-                  {user?.location.city} {user?.location.country}
-                </Text>
-              </S.UserInfo>
-              <S.IconButtonWrapper isVisible={index === hoveredUserId}>
-                <IconButton>
-                  <FavoriteIcon color="error" />
-                </IconButton>
-              </S.IconButtonWrapper>
-            </S.User>
+            <User
+                user={user}
+                index={index}
+                key={index}
+                toggleFavorite={toggleFavorite}
+                isFavorite={isFavorite}
+                handleMouseEnter={handleMouseEnter}
+                handleMouseLeave={handleMouseLeave}
+                hoveredUserId={hoveredUserId}
+
+              />
           );
-        })}
+        })
+        }
         {isLoading && (
           <S.SpinnerWrapper>
             <Spinner color="primary" size="45px" thickness={6} variant="indeterminate" />
