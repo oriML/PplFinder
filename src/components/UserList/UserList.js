@@ -12,8 +12,6 @@ const UserList = ({ users, isLoading }) => {
 
   const [hoveredUserId, setHoveredUserId] = useState();
   const [searchValue, setSearchValue] = useState([]);
-  const [favoriteUserId, setFavoriteUserId] = useState([]);
-  const {favorites, setFavorites} = useContext(FavoritesContext);
   const { toggleFavorite, isFavorite } = useFavorites();
 
   const handleMouseEnter = (index) => {
@@ -23,17 +21,6 @@ const UserList = ({ users, isLoading }) => {
   const handleMouseLeave = () => {
     setHoveredUserId();
   };
-
-  // const toggleFavorite = (user)=>{
-  //   if(favoriteUserId.includes(user.login.uuid)){
-  //     setFavoriteUserId(favoriteUserId.filter(value=> value !== user.login.uuid))
-  //     setFavorites(favorites[user.login.uuid].filter(favorite=> favorite.login.uuid !== user.login.uuid))
-  //     return
-  //   }
-  //   setFavoriteUserId([...favoriteUserId, user.login.uuid]);
-  //   setFavorites({...favorites, user})
-  //   console.log(favorites);
-  // }
 
   const onChange = (value)=>{
     if(searchValue.includes(value)){
@@ -66,7 +53,6 @@ const UserList = ({ users, isLoading }) => {
         ))}
       </S.Filters>
       <S.List>
-        {console.log(users)}
         {applyUsers()
         .map((user, index) => {
           return (

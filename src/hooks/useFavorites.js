@@ -11,11 +11,13 @@ const { favorites, setFavorites } = useContext(FavoritesContext);
     const getId = user => user.login.uuid;
 
     const toggleFavorite = (user) => {
+      
       setFavorites(prevFavorites => {
+          // destructuring from the object
           const { [getId(user)]: targetUser, ...restOfTheFavorites } = prevFavorites;
-          // remove the user from favorites
-          if (targetUser) return restOfTheFavorites
-          // adds favorite
+            if (targetUser) return restOfTheFavorites
+
+          // set new user to the object
           return { ...prevFavorites, [getId(user)]: user };
         });
     }

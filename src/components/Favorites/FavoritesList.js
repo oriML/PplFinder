@@ -1,24 +1,24 @@
 import React, { useEffect, useState} from "react";
-import Text from "components/Text";
 import Spinner from "components/Spinner";
 import CheckBox from "components/CheckBox";
-import IconButton from "@material-ui/core/IconButton";
-import FavoriteIcon from "@material-ui/icons/Favorite";
-import {COUNTRIES}  from "constant";
+import { useFavorites } from 'hooks/useFavorites';
 
+import {COUNTRIES}  from "constant";
+import User from "components/User";
 import * as S from "./style";
 
-const FavoritesList = ( {favorites, toggleFavorite, isFavorite} ) => {
+const FavoritesList = ( {favorites} ) => {
 
   const [hoveredUserId, setHoveredUserId] = useState();
   const [searchValue, setSearchValue] = useState([]);
-  
+  const {toggleFavorite, isFavorite} = useFavorites();
+
   useEffect(() => {
-    console.log(favorites)
+    console.log("Favorites List: ",favorites)
   }, [])
 
   const applyUsers = ()=>{
-    let usersTmp = favorites.length? Object.values(favorites) : [];
+    let usersTmp = favorites.length? favorites : [];
     searchValue.length && (usersTmp = favorites.filter(({nat}) => searchValue.includes(nat) ))
     
     return usersTmp
@@ -55,7 +55,7 @@ const FavoritesList = ( {favorites, toggleFavorite, isFavorite} ) => {
         ))}
       </S.Filters>
       <S.List>
-        { 1? console.log(favorites) : favorites.length?
+        { favorites.length?
         applyUsers()
         .map((user, index) => {
           return (
@@ -70,7 +70,7 @@ const FavoritesList = ( {favorites, toggleFavorite, isFavorite} ) => {
               hoveredUserId={hoveredUserId}
 
             />
-            
+
           );
         })
         
