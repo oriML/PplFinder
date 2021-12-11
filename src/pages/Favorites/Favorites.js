@@ -5,10 +5,9 @@ import Text from "components/Text";
 import * as S from "./style";
 
 const Favorites = () => {
+  
   const { favorites } = useFavorites();
-  useEffect(() => {
-    console.log('fav - ', favorites)
-  }, [])
+  
   return (
     <S.Favorites>
       <S.Content>

@@ -1,8 +1,7 @@
 import React, { useEffect, useState} from "react";
-import Spinner from "components/Spinner";
 import CheckBox from "components/CheckBox";
 import { useFavorites } from 'hooks/useFavorites';
-
+import Text from "components/Text";
 import {COUNTRIES}  from "constant";
 import User from "components/User";
 import * as S from "./style";
@@ -12,10 +11,6 @@ const FavoritesList = ( {favorites} ) => {
   const [hoveredUserId, setHoveredUserId] = useState();
   const [searchValue, setSearchValue] = useState([]);
   const {toggleFavorite, isFavorite} = useFavorites();
-
-  useEffect(() => {
-    console.log("Favorites List: ",favorites)
-  }, [])
 
   const applyUsers = ()=>{
     let usersTmp = favorites.length? favorites : [];
@@ -75,9 +70,9 @@ const FavoritesList = ( {favorites} ) => {
         })
         
         :
-          <S.SpinnerWrapper>
-            <Spinner color="primary" size="45px" thickness={6} variant="indeterminate" />
-          </S.SpinnerWrapper>
+        <Text size="20px">
+          No Favorites. Click on the ♥ Icon to add some.
+        </Text>
       }
       </S.List>
     </S.FavoritesList>
