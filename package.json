@@ -1,5 +1,5 @@
 {
-  "homepage": "https://oriML.github.io/PplFinder/",
+  "homepage": "http://oriML.github.io/PplFinder/",
   "name": "ppl-finder",
   "version": "1.0.7",
   "bin": "./bin/cli.js",
