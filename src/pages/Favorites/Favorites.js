@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React from "react";
 import { useFavorites } from 'hooks/useFavorites';
 import FavoritesList from "components/Favorites/FavoritesList";
 import Text from "components/Text";

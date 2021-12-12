@@ -17,11 +17,12 @@ const FavoritesList = ( {favorites} ) => {
     let usersTmp = 
     favorites.length?
     searchValue.length ? 
-    (
-      favorites.filter(({location:{country},name:{first, last}, email}) => {
-      return ((country + first + last + email).toLowerCase()).includes(searchValue)
-    }
-    ))  : favorites
+    
+      favorites.filter(({location:{country},name:{title, first, last}, email}) => {
+        return [country,title ,first ,last ,email]
+              .some((value)=>value.toLowerCase().includes(searchValue))
+    })
+    : favorites
     : [];
 
     return usersTmp
@@ -38,6 +39,7 @@ const FavoritesList = ( {favorites} ) => {
   return (
     <S.FavoritesList>
       <S.Filters>
+    
         {
         <SearchBar 
           value={searchValue}

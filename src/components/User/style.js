@@ -6,7 +6,7 @@ export const User = styled.div`
   gap: 16px;
   :hover{
     cursor: pointer;
-    background-color: rgb(0,0,0,0.5);
+    background-color: rgb(0,250,240,0.5);
     border-radius: 20px;
     transition: .2s ease-in;
     

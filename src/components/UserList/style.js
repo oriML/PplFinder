@@ -24,7 +24,7 @@ export const SpinnerWrapper = styled.div`
 export const Filters = styled.div`
   display: flex;
   justify-content: left;
-  overflow: scroll;
+  overflow: auto;
   width:500px;
   height:10vh;
   & > * {

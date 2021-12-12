@@ -14,15 +14,6 @@ export const List = styled.div`
   margin-block-start: 30px;
   overflow-y: auto;
 `;
-// export const List = styled.div`
-//   display: flex;
-//   flex-direction: column;
-//   gap: 35px;
-//   width: 500px;
-//   height: calc(100vh - 270px);
-//   margin-block-start: 30px;
-//   overflow-y: auto;
-// `;
 
 export const User = styled.div`
   display: flex;
