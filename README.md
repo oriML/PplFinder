@@ -1,62 +1,19 @@
-# Ppl Finder
+Hi! Tnx for the extremely cool assignment! :)
 
-Welcome to the Ppl Finder application.
-This app is a simple application which displays randomly generated user information in a list, using the `randomuser.me` API.
+plz let me mention 2 problems that I have notice:
+at file UserList.js -> Checkbox component, the nat="DE" attached to the label="Germany".
+It seems to have an inattention at this part. it's the API's creators responsability but important
+to mention it.
 
-## Getting Started
+at Text.js -> the console returnes a validateDomNesting error.
+the problem was at Text.js. the Typography component is set to be a <p> by
+default and its children to <div>.
+my solution:
+I set the variant property at Typography component to 'h3' 
+and at style.js of Text.js I set the line-height to 150% to keep on the same style look.
 
-To get this app running locally all you need to do is:
+2 Tasks are completed.
+Bonus expanded -> countries Checkboxes rendered by the countries of the fetched users.
+Favorites page -> embedded search bar. favorites rendered by search input of name, email or country.
 
-1. Make sure you have a [Github](https://github.com) account
-2. [Fork this repository](https://github.com/powerlink/PplFinder) to your GitHub account.
-3. Clone your newly created repository
-4. In the created folder install the node modules `npm install`
-5. Run the app `npm start`
-6. Your local app should be available at `http://localhost:3000`
-
-## Your Tasks
-
-This project includes 3 main tasks, all of which are mandatory, besides the bonus questions.\
-You can and should learn new skills during the process, you may consult with Google and friends but you will need to explain why you implemented what you implemented, so be responsible for your code.
-
-### Task 1 - Filters
-
-Above the list, there are several disfunctional checkboxes, which should add country filters to the user request, you need to make them work as follows:
-
-1. Leaving them all unchecked should display all countries.
-2. Checking one of the checkboxes should only fetch users from that specific country.
-3. Checking several checkboxes should fetch users from all of the selected countries.
-
-#### Bonus:
-
-1. Add another country filter.
-
-### Task 2 - Favorites
-
-Each user displays a heart icon while hovered, you need to implement the following functionality:
-
-1. Add functionality which enables the user to select their favorite users.
-   - Should be persistent - refreshing or closing the site will not reset the favorites.
-2. Once a user is Favorited, the heart icon should stay visible even if the user is not currently being hovered over.
-3. Clicking on a favorite user's heart icon should unfavorite the user.
-4. Favorite Page\
-   4.1. The Navbar has a Favorites tab, which should navigate to a new Favorite Page once clicked.\
-   4.2. The Favorite Page should display all of the Favorited users.\
-   4.3. Clicking on a heart icon inside the favorite page should unfavorite the user, and remove it from the page.
-
-## Tips / Notes
-
-- All the code you'll change / add will be in the `/src` folder.
-- If you want to use `npm` modules for other parts, go for it - just make sure you know how they work under the hood.
-
-#### Remember: this test is designed to see how you complete tasks that require self learning, not to test your existing knowledge.
-
-## Submitting your project
-
-After you've completed your tasks, and you are ready to submit it, do the following:
-
-1. Make sure all the code is committed and pushed
-2. Deploy your app using Github Pages.
-3. Send us an email with your repo link & deployed app url.
-
-## Good Luck!
+Tnx again! :-)
