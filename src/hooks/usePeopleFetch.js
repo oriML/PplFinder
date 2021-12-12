@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import axios from "axios";
 
 export const usePeopleFetch = () => {
+  
   const [users, setUsers] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
 

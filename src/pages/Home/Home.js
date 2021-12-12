@@ -5,14 +5,9 @@ import { usePeopleFetch } from "hooks";
 import * as S from "./style";
 
 const Home = () => {
-  // const { users, isLoading } = usePeopleFetch();
+
  const { users, isLoading } =  usePeopleFetch();
-  useEffect(()=>{
-    
-   
-
-  },[])
-
+ const countries = Array.from(new Set(users.map(user => user.location.country.toLowerCase())))
 
   return (
     <S.Home>
@@ -22,7 +17,7 @@ const Home = () => {
             PplFinder
           </Text>
         </S.Header>
-        <UserList users={users} isLoading={isLoading} />
+      <UserList users={users} isLoading={isLoading} countries={countries} />
       </S.Content>
     </S.Home>
   );

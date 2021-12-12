@@ -1,30 +1,30 @@
-import React, { useEffect, useState} from "react";
-import CheckBox from "components/CheckBox";
+import React, { useState } from "react";
+import SearchBar from "components/SearchBar";
 import { useFavorites } from 'hooks/useFavorites';
 import Text from "components/Text";
-import {COUNTRIES}  from "constant";
-import User from "components/User";
+import User  from "components/User";
+
 import * as S from "./style";
 
 const FavoritesList = ( {favorites} ) => {
 
   const [hoveredUserId, setHoveredUserId] = useState();
-  const [searchValue, setSearchValue] = useState([]);
+  const [searchValue, setSearchValue] = useState("");
   const {toggleFavorite, isFavorite} = useFavorites();
 
-  const applyUsers = ()=>{
-    let usersTmp = favorites.length? favorites : [];
-    searchValue.length && (usersTmp = favorites.filter(({nat}) => searchValue.includes(nat) ))
+  const applyFavorites = ()=>{
     
-    return usersTmp
-  };
-
-  const onChange = (value)=>{
-    if(searchValue.includes(value)){
-      setSearchValue(searchValue.filter(val=> val !== value))
-      return
+    let usersTmp = 
+    favorites.length?
+    searchValue.length ? 
+    (
+      favorites.filter(({location:{country},name:{first, last}, email}) => {
+      return ((country + first + last + email).toLowerCase()).includes(searchValue)
     }
-    setSearchValue([...searchValue, value])
+    ))  : favorites
+    : [];
+
+    return usersTmp
   };
   
   const handleMouseEnter = (index) => {
@@ -39,19 +39,16 @@ const FavoritesList = ( {favorites} ) => {
     <S.FavoritesList>
       <S.Filters>
         {
-        COUNTRIES.map(({_id, _country})=>(
-          <CheckBox 
-          key={_id}
-          value={_id}
-          label={_country[0].toUpperCase() + _country.slice(1)}
-          onChange={()=> onChange(_id)}
-          
+        <SearchBar 
+          value={searchValue}
+          onChange={(newValue) => setSearchValue(newValue)}
+            
           />
-        ))}
+          }
       </S.Filters>
       <S.List>
         { favorites.length?
-        applyUsers()
+        applyFavorites()
         .map((user, index) => {
           return (
             <User
@@ -70,6 +67,7 @@ const FavoritesList = ( {favorites} ) => {
         })
         
         :
+        
         <Text size="20px">
           No Favorites. Click on the ♥ Icon to add some.
         </Text>

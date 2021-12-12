@@ -12,8 +12,8 @@ const Favorites = () => {
     <S.Favorites>
       <S.Content>
         <S.Header>
-          <Text size="64px" bold>
-            My ♥
+          <Text size="60px" bold>
+            My Favorites
           </Text>
         </S.Header>
         <FavoritesList favorites={favorites} />

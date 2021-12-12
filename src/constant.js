@@ -18,11 +18,3 @@ export const COLORS = {
   primary: "primary",
   secondary: "secondary",
 };
-
-export const COUNTRIES = [
-  { _id: "BR", _country: "brazil" },
-  { _id: "AU", _country: "australia" },
-  { _id: "CA", _country: "canada" },
-  { _id: "DE", _country: "germany" },
-  { _id: "FI", _country: "finland" },
-];

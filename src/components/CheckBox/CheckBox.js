@@ -7,12 +7,11 @@ const CheckBox = ({ isChecked, onChange, label, value }) => {
   
   const handleChange = () => {
     onChange && onChange(value);
-
   };
   return (
     <S.CheckBox>
       <FormControlLabel
-        control={<Checkbox onChange={handleChange} color="primary" />}
+        control={<Checkbox onChange={handleChange} color="primary" checked={isChecked}/>}
         label={label}
       />
     </S.CheckBox>
