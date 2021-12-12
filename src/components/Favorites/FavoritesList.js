@@ -20,7 +20,7 @@ const FavoritesList = ( {favorites} ) => {
     
       favorites.filter(({location:{country},name:{title, first, last}, email}) => {
         return [country,title ,first ,last ,email]
-              .some((value)=>value.toLowerCase().includes(searchValue))
+              .some((value)=>value.toLowerCase().includes(searchValue.toLowerCase()))
     })
     : favorites
     : [];
